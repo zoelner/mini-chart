@@ -1,0 +1,12 @@
+{
+  "name": "mini-chart",
+  "displayName": "mini-chart",
+  "expo": {
+    "name": "mini-chart",
+    "slug": "mini-chart",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
