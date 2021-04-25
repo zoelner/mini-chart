@@ -1,19 +1,35 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+
+import { ProductType } from '../../types';
+
 import Product from './Product';
 import { Container } from './styles';
 
 function Products() {
-  const data = [...Array(8).keys()];
+  const [products, setProducts] = useState<ProductType[]>([]);
+
+  useEffect(() => {
+    async function loadProducts() {
+      const response = await axios.get<ProductType[]>(
+        'https://gist.githubusercontent.com/zoelner/f5070bf6877949243260db83759689f9/raw/f9d983bb2b07ce343a8635a403cfdb0e8d956020/products.json'
+      );
+
+      setProducts(response.data);
+    }
+
+    loadProducts();
+  }, []);
 
   return (
     <Container>
-      <FlatList
+      <FlatList<ProductType>
         columnWrapperStyle={{ justifyContent: 'space-between' }}
-        data={data}
-        keyExtractor={(product) => String(product)}
+        data={products}
+        keyExtractor={(product) => String(product.id)}
         numColumns={2}
-        renderItem={({ item: product }) => <Product />}
+        renderItem={({ item: product }) => <Product {...product} />}
       />
     </Container>
   );
