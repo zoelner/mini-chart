@@ -10,6 +10,9 @@ import { useColorScheme } from 'react-native';
 import { RootStackParamList } from '../types';
 
 import Products from '../screens/Products';
+import Cart from '../screens/Cart';
+
+import CartIcon from '../components/CartIcon';
 
 export default function Navigation() {
   const scheme = useColorScheme();
@@ -29,8 +32,18 @@ function RootNavigator() {
       <Stack.Screen
         name='Products'
         component={Products}
-        options={{
+        options={({ navigation }) => ({
           headerTitle: 'Produtos',
+          headerRight: () => (
+            <CartIcon onPress={() => navigation.navigate('Cart')} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name='Cart'
+        component={Cart}
+        options={{
+          headerTitle: 'Carrinho',
         }}
       />
     </Stack.Navigator>
