@@ -21,7 +21,11 @@ export const CartItem = styled.View`
   justify-content: space-between;
 `;
 
-export const CartItemImage = styled.View`
+export const CartItemImage = styled.ImageBackground.attrs({
+  imageStyle: {
+    resizeMode: 'contain',
+  },
+})`
   height: 40px;
   width: 40px;
   background-color: #cecece;

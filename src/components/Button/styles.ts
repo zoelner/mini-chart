@@ -8,7 +8,7 @@ const variantsContainer = {
     background-color: #f44336;
   `,
   add: css`
-    background-color: #4caf50;
+    background-color: #00c700;
   `,
 };
 
@@ -27,6 +27,7 @@ export const Container = styled(TouchableOpacity)<VariantProps>`
 
 export const Text = styled.Text`
   font-size: 15px;
+  font-weight: bold;
   color: #fff;
   text-align: center;
 `;

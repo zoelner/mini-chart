@@ -9,22 +9,28 @@ import {
   Container,
   Title,
 } from './style';
+import { useCartContext } from '../../context/CartProvider';
 
 function Cart() {
-  const data = [...Array(2).keys()];
+  const { products, count, remove } = useCartContext();
 
   return (
     <Container>
-      <Title>X Produtos adicionados</Title>
+      <Title>{count} Produtos adicionados</Title>
 
       <FlatList
-        data={data}
-        keyExtractor={(product) => String(product)}
+        data={products}
+        keyExtractor={(product) => String(product.id)}
         renderItem={({ item: product }) => (
           <CartItem>
-            <CartItemImage />
-            <CartItemText>Product</CartItemText>
-            <Ionicons name='close-circle-outline' size={24} color='#f44336' />
+            <CartItemImage source={{ uri: product.image }} />
+            <CartItemText>{product.title}</CartItemText>
+            <Ionicons
+              name='close-circle-outline'
+              size={24}
+              color='#f44336'
+              onPress={() => remove(product.id)}
+            />
           </CartItem>
         )}
       />

@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
 import Button from '../../../components/Button';
+import { useCartContext } from '../../../context/CartProvider';
+import { ProductType } from '../../../types';
+
 import { Container, Text, Image } from './styles';
 
-function Product() {
+type ProductProps = ProductType;
+
+function Product(props: ProductProps) {
+  const { id, title, image } = props;
+
+  const { insert, remove, products } = useCartContext();
+
+  function handleInsertProduct() {
+    insert(props);
+  }
+
+  function handleRemoveProduct() {
+    remove(id);
+  }
+
+  const productExistsInCart = useMemo(() => {
+    return products.findIndex((product) => product.id === id) !== -1;
+  }, [products]);
+
+  const handleProduct = productExistsInCart
+    ? handleRemoveProduct
+    : handleInsertProduct;
+
   return (
     <Container>
-      <Image />
-      <Text>Product 1</Text>
-      <Button>Remove</Button>
+      <Image source={{ uri: image }} />
+      <Text>{title}</Text>
+      <Button
+        onPress={handleProduct}
+        variant={productExistsInCart ? 'remove' : 'add'}
+      >
+        {productExistsInCart ? 'Remover' : 'Adicionar'}
+      </Button>
     </Container>
   );
 }
