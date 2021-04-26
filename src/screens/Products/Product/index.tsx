@@ -25,7 +25,7 @@ function Product(props: ProductProps) {
     return products.findIndex((product) => product.id === id) !== -1;
   }, [products]);
 
-  const handleProduct = productExistsInCart
+  const handleRemoveOrInsertProduct = productExistsInCart
     ? handleRemoveProduct
     : handleInsertProduct;
 
@@ -34,7 +34,7 @@ function Product(props: ProductProps) {
       <Image source={{ uri: image }} />
       <Text>{title}</Text>
       <Button
-        onPress={handleProduct}
+        onPress={handleRemoveOrInsertProduct}
         variant={productExistsInCart ? 'remove' : 'add'}
       >
         {productExistsInCart ? 'Remover' : 'Adicionar'}
