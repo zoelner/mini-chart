@@ -15,10 +15,8 @@ import Cart from '../screens/Cart';
 import CartIcon from '../components/CartIcon';
 
 export default function Navigation() {
-  const scheme = useColorScheme();
-
   return (
-    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer>
       <RootNavigator />
     </NavigationContainer>
   );
